@@ -1,0 +1,8 @@
+{
+  "name": "Sanskrit Education Portal - Ajith Bandara",
+  "description": "An interactive web portal for Sanskrit language studies, shloka translations, and personal classes by renowned educator Ajith Bandara, featuring AI-powered Shloka analysis and study plan generator.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="si" class="theme-gurukul">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="tab-title">අජිත් බංඩාර සංස්කෘත අධ්‍යයන කේන්ද්‍රය - Sanskrit Academy</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Abhaya+Libre:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&family=Noto+Serif+Sinhala:wght@300;400;500;600;700;800&family=Yatra+One&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sinhala: ['Noto Serif Sinhala', 'Abhaya Libre', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+            sanskrit: ['Yatra One', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Gurukul Ivory & Gold Theme */
+    .theme-gurukul {
+      --bg-primary: #fcf9f2;
+      --bg-secondary: #f5eedc;
+      --bg-tertiary: #ebdcb0;
+      --border-color: rgba(139, 90, 43, 0.2);
+      --border-glow: rgba(139, 90, 43, 0.08);
+      --text-main: #2c1a0c;
+      --text-muted: #5e432d;
+      --accent-color: #b8860b;
+      --accent-hover: #8b5a2b;
+      --accent-gradient: linear-gradient(135deg, #8b5a2b 0%, #b8860b 100%);
+      --card-bg: rgba(255, 255, 255, 0.9);
+    }
+
+    /* Midnight Shastra Dark Theme */
+    .theme-midnight {
+      --bg-primary: #0f0a05;
+      --bg-secondary: #1a1107;
+      --bg-tertiary: #2a1b0d;
+      --border-color: rgba(212, 175, 55, 0.25);
+      --border-glow: rgba(212, 175, 55, 0.15);
+      --text-main: #f5eedc;
+      --text-muted: #c2b09c;
+      --accent-color: #d4af37;
+      --accent-hover: #f3e8db;
+      --accent-gradient: linear-gradient(135deg, #d4af37 0%, #aa7c11 100%);
+      --card-bg: rgba(26, 17, 7, 0.75);
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: 'Noto Serif Sinhala', 'Inter', sans-serif;
+      transition: background-color 0.4s ease, color 0.4s ease;
+    }
+
+    .custom-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 4px 20px -2px var(--border-glow);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .custom-card:hover {
+      border-color: var(--accent-color);
+      box-shadow: 0 8px 30px 2px var(--border-glow);
+      transform: translateY(-2px);
+    }
+
+    .custom-btn {
+      background: var(--accent-gradient);
+      color: #fff;
+      transition: all 0.2s ease;
+    }
+
+    .custom-btn:hover {
+      opacity: 0.95;
+      transform: scale(1.02);
+    }
+
+    /* Ancient scroll aesthetic */
+    .scroll-ancient {
+      background: #f4edd4;
+      border: 8px double #8b5a2b;
+      color: #2c1a0c;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+      background-image: radial-gradient(rgba(139,90,43,0.05) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 99px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--accent-color); }
+  </style>
+</head>
+<body class="min-h-screen relative flex flex-col justify-between overflow-x-hidden pb-12">
+
+  <!-- NAVIGATION BAR -->
+  <header class="sticky top-0 left-0 right-0 z-50 backdrop-blur-md border-b bg-white/10 transition-all" style="border-color: var(--border-color);" id="main-header">
+    <div class="max-w-7xl mx-auto px-4 py-3.5 flex justify-between items-center">
+      <!-- Sanskrit Scholar Brand Logo -->
+      <a href="#" class="flex items-center gap-3 group" id="logo-link">
+        <div class="w-10 h-10 rounded-full flex items-center justify-center border transition-all duration-500 group-hover:rotate-12" style="border-color: var(--accent-color); background: rgba(184,134,11,0.12)">
+          <span class="text-xl font-sanskrit" style="color: var(--accent-color);">ॐ</span>
+        </div>
+        <div>
+          <h1 class="text-sm md:text-base font-bold tracking-wide font-sinhala" style="color: var(--accent-color);" id="brand-title">අජිත් බංඩාර සංස්කෘත අධ්‍යයන කේන්ද්‍රය</h1>
+          <p class="text-[9px] uppercase tracking-widest font-sans" style="color: var(--text-muted);" id="brand-subtitle">Sanskrit Language & Classics Academy</p>
+        </div>
+      </a>
+
+      <!-- Controls: Lang, Theme & Register -->
+      <div class="flex items-center gap-3">
+        <!-- Language Switcher -->
+        <button onclick="toggleLanguage()" class="text-xs font-bold px-3 py-1.5 rounded-lg border transition-all flex items-center gap-1 cursor-pointer bg-black/5 hover:bg-black/10" style="border-color: var(--border-color); color: var(--text-main);" id="lang-toggle-btn">
+          <i data-lucide="languages" class="w-3.5 h-3.5"></i>
+          <span id="lang-btn-txt">English</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button onclick="toggleTheme()" class="p-2 rounded-lg border transition-all cursor-pointer bg-black/5 hover:bg-black/10" style="border-color: var(--border-color); color: var(--accent-color);" title="Toggle Theme" id="theme-toggle-btn">
+          <i data-lucide="sun" class="w-4 h-4 hidden" id="theme-icon-sun"></i>
+          <i data-lucide="moon" class="w-4 h-4" id="theme-icon-moon"></i>
+        </button>
+
+        <!-- WhatsApp Quick Connect -->
+        <a href="https://wa.me/94758292584" target="_blank" class="hidden sm:flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-bold rounded-lg border border-emerald-500/30 text-emerald-600 dark:text-emerald-400 bg-emerald-500/5 hover:bg-emerald-500/10 transition-all" id="whatsapp-quick-btn">
+          <i data-lucide="message-circle" class="w-3.5 h-3.5"></i> +94 75 829 2584
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="max-w-7xl mx-auto px-4 mt-6 md:mt-8 flex-1 space-y-12" id="main-content">
+
+    <!-- HERO DISPLAY BANNER -->
+    <section class="relative rounded-3xl overflow-hidden custom-card p-0 h-[280px] md:h-[420px] flex items-end shadow-xl" id="hero-section">
+      <!-- Background Library/Sanskrit Heritage artwork -->
+      <img src="./src/assets/images/temple_hero_banner_1784205849403.jpg" alt="Sanskrit Scholar Background" class="absolute inset-0 w-full h-full object-cover select-none pointer-events-none filter sepia-[0.15] brightness-[0.7]" referrerPolicy="no-referrer" id="hero-bg-img">
+      <!-- Overlays -->
+      <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-transparent"></div>
+
+      <!-- Live Quote Audio play -->
+      <div class="absolute top-5 right-5 z-20">
+        <button onclick="playIntroShloka()" class="p-3 rounded-full custom-btn flex items-center justify-center cursor-pointer shadow-lg hover:scale-110 active:scale-95 transition-all" title="Listen to Saraswati Vandana Mantra" id="shloka-audio-btn">
+          <i data-lucide="music" class="w-5 h-5 text-white animate-bounce" id="shloka-music-icon"></i>
+        </button>
+      </div>
+
+      <div class="relative z-10 p-6 md:p-10 space-y-2 md:space-y-3 w-full text-white">
+        <div class="flex items-center gap-2">
+          <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-ping"></span>
+          <p class="text-xs font-semibold text-amber-300 uppercase tracking-widest font-sans" id="hero-indicator">Classical Sanskrit Heritage</p>
+        </div>
+        <h2 class="text-2xl md:text-5xl font-extrabold tracking-tight text-white font-sinhala leading-tight drop-shadow-md" id="hero-main-title">
+          ගීර්වාණ භාෂා ප්‍රවේශය - සංස්කෘත අධ්‍යයනය
+        </h2>
+        <p class="text-xs md:text-base text-slate-200 max-w-2xl font-sinhala font-light leading-relaxed drop-shadow-sm" id="hero-tagline">
+          ප්‍රවීණ දේශක අජිත් බංඩාර ගුරුතුමාගේ මඟපෙන්වීම යටතේ පාසල් විෂය නිර්දේශය (6-13 ශ්‍රේණි), ප්‍රාචීන විභාග සහ භාෂා ආධුනිකයන් සඳහා පවත්වනු ලබන උසස් සංස්කෘත පන්ති මාලාව.
+        </p>
+      </div>
+    </section>
+
+    <!-- TWO-COLUMN LAYOUT -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start" id="workspace-grid">
+      
+      <!-- LEFT COLUMN: EDUCATION TOOLS & BIO (7 COLS) -->
+      <div class="lg:col-span-7 space-y-12" id="left-column">
+
+        <!-- NAV ANCHORS RAIL -->
+        <div class="flex gap-2 overflow-x-auto pb-2 border-b scroll-smooth" style="border-color: var(--border-color);" id="nav-anchor-rail">
+          <button onclick="scrollToSection('sec-ai-decoder')" class="px-4 py-2 text-xs font-bold rounded-lg border shrink-0 transition-all cursor-pointer bg-black/5 hover:bg-black/10 text-main" style="border-color: var(--accent-color);" id="tab-btn-decoder">ශ්ලෝක AI විග්‍රහය</button>
+          <button onclick="scrollToSection('sec-vocabulary')" class="px-4 py-2 text-xs font-bold rounded-lg border shrink-0 transition-all cursor-pointer bg-black/5 hover:bg-black/10 text-main" style="border-color: var(--border-color);" id="tab-btn-vocabulary">ශබ්දකෝෂය</button>
+          <button onclick="scrollToSection('sec-subhashita')" class="px-4 py-2 text-xs font-bold rounded-lg border shrink-0 transition-all cursor-pointer bg-black/5 hover:bg-black/10 text-main" style="border-color: var(--border-color);" id="tab-btn-subhashita">උතුම් සූක්ති මාලාව</button>
+          <button onclick="scrollToSection('sec-bio')" class="px-4 py-2 text-xs font-bold rounded-lg border shrink-0 transition-all cursor-pointer bg-black/5 hover:bg-black/10 text-main" style="border-color: var(--border-color);" id="tab-btn-bio">දේශක තොරතුරු</button>
+          <button onclick="scrollToSection('sec-classes')" class="px-4 py-2 text-xs font-bold rounded-lg border shrink-0 transition-all cursor-pointer bg-black/5 hover:bg-black/10 text-main" style="border-color: var(--border-color);" id="tab-btn-classes">පන්ති විස්තර</button>
+        </div>
+
+        <!-- MODULE 1: AI SHLOKA DECODER & TRANSLATOR -->
+        <section id="sec-ai-decoder" class="custom-card p-6 md:p-8 rounded-3xl space-y-6">
+          <div class="flex items-center gap-3.5 pb-4 border-b" style="border-color: var(--border-color);">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
+              <i data-lucide="sparkles" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-lg md:text-xl font-bold font-sinhala text-main" id="decoder-title">ශ්ලෝක සහ ව්‍යාකරණ AI විශ්ලේෂකය</h3>
+              <p class="text-[10px] uppercase tracking-widest text-muted font-sans">Sanskrit Shloka Decoder & Sandhi Splitter</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <p class="text-xs md:text-sm leading-relaxed text-muted font-sinhala" id="decoder-intro">
+              ඔබට හමුවන ඕනෑම සංස්කෘත ශ්ලෝකයක්, පද්‍යයක් හෝ වාක්‍යයක් පහත කොටුවේ ඇතුළත් කරන්න. අපගේ කෘත්‍රිම බුද්ධි උපදේශකයා විසින් එහි පද විග්‍රහය (Sandhi Splitting), ශබ්දාර්ථය (Literal Meaning) සහ ව්‍යාකරණ රීති සිංහලෙන් සහ ඉංග්‍රීසියෙන් පැහැදිලි කර දෙනු ඇත.
+            </p>
+
+            <div class="space-y-2">
+              <textarea id="shloka-input" rows="3" placeholder="උදා: उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः। (මෙහි ශ්ලෝකය ඇතුළත් කරන්න...)" class="w-full p-4 bg-black/5 border rounded-2xl text-xs md:text-sm focus:outline-none focus:ring-1 focus:ring-amber-500 text-main font-sanskrit font-medium" style="border-color: var(--border-color);"></textarea>
+              <div class="flex flex-wrap gap-2">
+                <button onclick="fillSampleShloka(1)" class="px-3 py-1.5 text-[10px] bg-black/5 hover:bg-black/10 border rounded-lg text-muted font-sinhala transition-all cursor-pointer" style="border-color: var(--border-color);">කාර්ය සාධන ශ්ලෝකය (Action)</button>
+                <button onclick="fillSampleShloka(2)" class="px-3 py-1.5 text-[10px] bg-black/5 hover:bg-black/10 border rounded-lg text-muted font-sinhala transition-all cursor-pointer" style="border-color: var(--border-color);">සුභාෂිත මන්ත්‍රය (Wisdom)</button>
+                <button onclick="fillSampleShloka(3)" class="px-3 py-1.5 text-[10px] bg-black/5 hover:bg-black/10 border rounded-lg text-muted font-sinhala transition-all cursor-pointer" style="border-color: var(--border-color);">ගුරු වන්දනාව (Guru Mantra)</button>
+              </div>
+            </div>
+
+            <button onclick="analyzeShloka()" class="w-full py-3 custom-btn rounded-xl font-bold font-sinhala text-xs transition-all flex items-center justify-center gap-2 cursor-pointer" id="decode-btn">
+              <i data-lucide="wand-2" class="w-4 h-4"></i> විශ්ලේෂණය ආරම්භ කරන්න (Analyze with Gemini)
+            </button>
+
+            <!-- Loading indicator -->
+            <div id="decoder-loading" class="hidden py-6 flex flex-col items-center justify-center space-y-2.5">
+              <div class="w-8 h-8 rounded-full border-4 border-amber-500/20 border-t-amber-500 animate-spin"></div>
+              <p class="text-xs text-amber-500 font-sinhala animate-pulse">සංස්කෘත ව්‍යාකරණ හා ශබ්දකෝෂ පද්ධති ක්‍රියාත්මක වේ...</p>
+            </div>
+
+            <!-- Analysis Result Pane -->
+            <div id="decoder-result" class="hidden p-5 bg-amber-500/5 border border-dashed rounded-2xl space-y-4" style="border-color: var(--accent-color);">
+              <div class="flex items-center justify-between border-b pb-2" style="border-color: var(--border-color);">
+                <span class="text-[10px] uppercase font-bold tracking-widest text-amber-600" id="res-badge">විශ්ලේෂණ ප්‍රතිඵලය (AI Report)</span>
+                <button onclick="clearDecoder()" class="text-[10px] hover:underline text-muted font-sinhala">පිරිසිදු කරන්න (Clear)</button>
+              </div>
+              <div class="space-y-3 text-xs md:text-sm text-main leading-relaxed" id="decoder-result-text">
+                <!-- Response injected dynamically -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- MODULE 2: INTERACTIVE VOCABULARY EXPLORER -->
+        <section id="sec-vocabulary" class="custom-card p-6 md:p-8 rounded-3xl space-y-6">
+          <div class="flex items-center gap-3.5 pb-4 border-b" style="border-color: var(--border-color);">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
+              <i data-lucide="book" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-lg md:text-xl font-bold font-sinhala text-main" id="vocab-title">සංස්කෘත සරල ශබ්දකෝෂය</h3>
+              <p class="text-[10px] uppercase tracking-widest text-muted font-sans">Interactive Everyday Sanskrit Terms</p>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <p class="text-xs md:text-sm text-muted font-sinhala leading-relaxed" id="vocab-intro">
+              සංස්කෘත භාෂාවේ එදිනෙදා භාවිත වන මූලික වචන කාණ්ඩ වෙන්කර පහත දක්වා ඇත. වචනය ශබ්ද කරන ආකාරය ශ්‍රවණය කිරීමට <strong>"Play"</strong> බොත්තම ඔබන්න.
+            </p>
+
+            <!-- Vocabulary Category Tabs -->
+            <div class="flex gap-1.5 overflow-x-auto pb-1" id="vocab-tabs">
+              <button onclick="switchVocabTab('greetings')" class="px-3.5 py-1.5 text-xs font-bold rounded-lg border shrink-0 transition-all cursor-pointer bg-black/5 text-main" style="border-color: var(--accent-color);" id="tab-v-greetings">පිළිගැනීම් (Greetings)</button>
+              <button onclick="switchVocabTab('numbers')" class="px-3.5 py-1.5 text-xs font-bold rounded-lg border shrink-0 transition-all cursor-pointer bg-black/5 text-muted" style="border-color: var(--border-color);" id="tab-v-numbers">සංඛ්‍යා (Numbers)</button>
+              <button onclick="switchVocabTab('nouns')" class="px-3.5 py-1.5 text-xs font-bold rounded-lg border shrink-0 transition-all cursor-pointer bg-black/5 text-muted" style="border-color: var(--border-color);" id="tab-v-nouns">නාමපද (Nouns)</button>
+              <button onclick="switchVocabTab('verbs')" class="px-3.5 py-1.5 text-xs font-bold rounded-lg border shrink-0 transition-all cursor-pointer bg-black/5 text-muted" style="border-color: var(--border-color);" id="tab-v-verbs">ක්‍රියාපද (Verbs)</button>
+            </div>
+
+            <!-- Tab Content Grid -->
+            <div id="vocab-grid-container" class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              <!-- Dynamically populated card list -->
+            </div>
+          </div>
+        </section>
+
+        <!-- MODULE 3: CURATED SUBHASHITA / SHLOKA LIBRARY -->
+        <section id="sec-subhashita" class="custom-card p-6 md:p-8 rounded-3xl space-y-6">
+          <div class="flex items-center gap-3.5 pb-4 border-b" style="border-color: var(--border-color);">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
+              <i data-lucide="bookmark" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-lg md:text-xl font-bold font-sinhala text-main" id="subhashita-title">උතුම් සංස්කෘත සුභාෂිත සූක්ති එකතුව</h3>
+              <p class="text-[10px] uppercase tracking-widest text-muted font-sans">Curated Classic Subhashitas & Chants</p>
+            </div>
+          </div>
+
+          <div class="space-y-4" id="shloka-library-container">
+            <!-- Dynamic shloka gallery built with beautiful scrolls -->
+          </div>
+        </section>
+
+        <!-- MODULE 4: BIOGRAPHY & ACADEMIC CREDENTIALS -->
+        <section id="sec-bio" class="custom-card p-6 md:p-8 rounded-3xl space-y-6">
+          <div class="flex items-center gap-3.5 pb-4 border-b" style="border-color: var(--border-color);">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-amber-500/10 border border-amber-500/30 text-amber-500">
+              <i data-lucide="user" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-lg md:text-xl font-bold font-sinhala text-main" id="bio-title">ප්‍රවීණ දේශක අජිත් බංඩාර ගුරුතුමා</h3>
+              <p class="text-[10px] uppercase tracking-widest text-muted font-sans">The Scholar Profile & Vision</p>
+            </div>
+          </div>
+
+          <div class="flex flex-col md:flex-row gap-6 items-center md:items-start" id="bio-layout">
+            <!-- Elegant image/illustration placeholder representing a Sanskrit scholar -->
+            <div class="w-32 h-32 md:w-40 md:h-40 rounded-3xl flex-shrink-0 bg-gradient-to-tr from-amber-600 to-amber-800 border-4 p-1.5 shadow-xl flex items-center justify-center text-white" style="border-color: var(--accent-color);">
+              <div class="w-full h-full rounded-2xl bg-black/20 flex flex-col items-center justify-center text-center p-3">
+                <span class="text-4xl">🎓</span>
+                <span class="text-[9px] uppercase font-bold mt-2.5 tracking-widest text-amber-300">Ajith Bandara</span>
+                <span class="text-[8px] text-slate-200 mt-1">Sanskrit Head</span>
+              </div>
+            </div>
+
+            <!-- Profile Info & Message -->
+            <div class="space-y-4 text-center md:text-left flex-1">
+              <div>
+                <h4 class="text-base md:text-lg font-bold font-sinhala text-amber-600 dark:text-amber-400" id="bio-name">ආචාර්ය අජිත් බංඩාර මහතා (Sanskrit Teacher)</h4>
+                <p class="text-xs text-muted font-sinhala" id="bio-role">සංස්කෘත භාෂා හා පෙරදිග ශාස්ත්‍ර පිළිබඳ ජ්‍යෙෂ්ඨ දේශක, ලේඛක</p>
+              </div>
+
+              <blockquote class="text-xs md:text-sm italic font-sinhala leading-relaxed text-main border-l-2 md:border-l-4 pl-4 py-1" style="border-color: var(--accent-color);" id="bio-quote">
+                "සංස්කෘත යනු හුදෙක් පැරණි භාෂාවක් පමණක් නොවේ. එය මිනිස් ශිෂ්ටාචාරයේ පාරිශුද්ධ ප්‍රඥාව, සාහිත්‍ය ධනය සහ සාරධර්ම ගැබ්වූ ද්වාරයකි. මාගේ අරමුණ අපගේ ශිෂ්‍ය පරපුරට මෙම සදාතනික උරුමය සරල, විද්‍යාත්මක හා ප්‍රායෝගික ක්‍රමවේද ඔස්සේ සමීප කරවීමයි."
+              </blockquote>
+
+              <div class="p-4 bg-black/5 border border-dashed rounded-2xl flex items-start gap-3 mt-4" style="border-color: var(--border-color);">
+                <span class="text-xl">✨</span>
+                <p class="text-xs text-muted leading-relaxed font-sinhala" id="bio-credentials">
+                  වසර 20කට අධික සේවා පළපුරුද්ද, දිවයිනේ ප්‍රමුඛතම පාසල් හා පිරිවෙන් කිහිපයක ප්‍රධාන ආචාර්ය ධුරය, දහස් සංඛ්‍යාත ශිෂ්‍ය ශිෂ්‍යාවන් උසස් පෙළ විභාගයන්ගෙන් ඉහළම ප්‍රථිපල කරා මෙහෙයවූ විශිෂ්ට ඉගැන්වීම් දක්ෂතාවය.
+                </p>
+              </div>
+
+              <!-- Quick direct WhatsApp/Sms call to action -->
+              <div class="pt-2 flex justify-center md:justify-start gap-2.5 flex-wrap">
+                <a href="https://wa.me/94758292584" target="_blank" class="px-4 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold transition-all shadow-md flex items-center gap-2 cursor-pointer">
+                  <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp මඟින් සම්බන්ධ වන්න
+                </a>
+                <a href="tel:+94758292584" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-xs font-bold transition-all shadow-md flex items-center gap-2 cursor-pointer">
+                  <i data-lucide="phone" class="w-4 h-4 text-amber-400"></i> සෘජු ඇමතුම් ලබාගන්න
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- MODULE 5: CLASSES & REGISTRATION -->
+        <section id="sec-classes" class="custom-card p-6 md:p-8 rounded-3xl space-y-6">
+          <div class="flex items-center gap-3.5 pb-4 border-b" style="border-color: var(--border-color);">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center bg-amber-500/10 border border-amber-500/30 text-amber-500">
+              <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+            </div>
+            <div>
+              <h3 class="text-lg md:text-xl font-bold font-sinhala text-main" id="classes-sec-title">පවත්වනු ලබන සංස්කෘත පන්ති මාලා</h3>
+              <p class="text-[10px] uppercase tracking-widest text-muted font-sans" id="classes-sec-subtitle">Available Curriculums & Batches</p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4" id="classes-grid">
+            <!-- Class 1 -->
+            <div class="p-4 bg-black/5 rounded-2xl border flex flex-col justify-between space-y-3" style="border-color: var(--border-color);">
+              <div class="space-y-1">
+                <span class="px-2 py-0.5 text-[8px] bg-amber-500/10 text-amber-600 border border-amber-500/20 rounded-full uppercase font-bold font-sans">School Syllabus</span>
+                <h4 class="text-sm font-bold text-main font-sinhala">අපොස උසස් පෙළ (A/L) පන්තිය</h4>
+                <p class="text-xs text-muted font-sinhala">12 மற்றும் 13 ශ්‍රේණි සඳහා විෂය නිර්දේශය සම්පූර්ණයෙන් ආවරණය කිරීම, පසුගිය විභාග ප්‍රශ්න පත්‍ර සාකච්ඡාව.</p>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-dashed" style="border-color: var(--border-color);">
+                <span class="text-xs font-semibold text-amber-600 dark:text-amber-400">මාසිකව රු. 1,500</span>
+                <span class="text-[10px] text-muted">සෑම සෙනසුරාදාම සවස 4.00</span>
+              </div>
+            </div>
+
+            <!-- Class 2 -->
+            <div class="p-4 bg-black/5 rounded-2xl border flex flex-col justify-between space-y-3" style="border-color: var(--border-color);">
+              <div class="space-y-1">
+                <span class="px-2 py-0.5 text-[8px] bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 rounded-full uppercase font-bold font-sans">Junior Batches</span>
+                <h4 class="text-sm font-bold text-main font-sinhala">6 - 11 ශ්‍රේණි පාසල් පන්ති</h4>
+                <p class="text-xs text-muted font-sinhala">පහසු ව්‍යාකරණ ක්‍රමවේද ඇසුරෙන් පදනම ශක්තිමත් කිරීම. වාර විභාගවලට විශේෂ පුහුණුව.</p>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-dashed" style="border-color: var(--border-color);">
+                <span class="text-xs font-semibold text-emerald-600">මාසිකව රු. 1,000</span>
+                <span class="text-[10px] text-muted">සෑම ඉරිදාම උදෑසන 8.30</span>
+              </div>
+            </div>
+
+            <!-- Class 3 -->
+            <div class="p-4 bg-black/5 rounded-2xl border flex flex-col justify-between space-y-3" style="border-color: var(--border-color);">
+              <div class="space-y-1">
+                <span class="px-2 py-0.5 text-[8px] bg-blue-500/10 text-blue-600 border border-blue-500/20 rounded-full uppercase font-bold font-sans">Traditional Exams</span>
+                <h4 class="text-sm font-bold text-main font-sinhala">ප්‍රාචීන ප්‍රාරම්භ / මධ්‍යම විභාග</h4>
+                <p class="text-xs text-muted font-sinhala">ප්‍රාචීන භාෂෝපකාර සමිතියේ විෂය නිර්දේශයට අනුකූලව ශාස්ත්‍රීය හා ගැඹුරු සංස්කෘත හැදෑරීම්.</p>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-dashed" style="border-color: var(--border-color);">
+                <span class="text-xs font-semibold text-blue-600">මාසිකව රු. 2,000</span>
+                <span class="text-[10px] text-muted">සෑම බදාදාවකම රාත්‍රී 8.00</span>
+              </div>
+            </div>
+
+            <!-- Class 4 -->
+            <div class="p-4 bg-black/5 rounded-2xl border flex flex-col justify-between space-y-3" style="border-color: var(--border-color);">
+              <div class="space-y-1">
+                <span class="px-2 py-0.5 text-[8px] bg-purple-500/10 text-purple-600 border border-purple-500/20 rounded-full uppercase font-bold font-sans">Enthusiasts</span>
+                <h4 class="text-sm font-bold text-main font-sinhala">වැඩිහිටි සංස්කෘත සරල ප්‍රවේශය</h4>
+                <p class="text-xs text-muted font-sinhala">භගවත් ගීතාව සහ පුරාණ සාහිත්‍ය වටහා ගැනීමට භාෂාව ආධුනික මට්ටමෙන් හැදෑරීමට කැමති අයට.</p>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-dashed" style="border-color: var(--border-color);">
+                <span class="text-xs font-semibold text-purple-600">මාසිකව රු. 1,500</span>
+                <span class="text-[10px] text-muted">සෑම ඉරිදාම රාත්‍රී 8.00</span>
+              </div>
+            </div>
+
+            <!-- Class 5 -->
+            <div class="p-4 bg-black/5 rounded-2xl border flex flex-col justify-between space-y-3" style="border-color: var(--border-color);">
+              <div class="space-y-1">
+                <span class="px-2 py-0.5 text-[8px] bg-yellow-500/10 text-yellow-600 border border-yellow-500/20 rounded-full uppercase font-bold font-sans">Pirivena Grade 1-5</span>
+                <h4 class="text-sm font-bold text-main font-sinhala">පිරිවෙන් 1-5 වසර මූලික සංස්කෘත පදනම</h4>
+                <p class="text-xs text-muted font-sinhala">පිරිවෙන්වල 1 සිට 5 වසර දක්වා ඉගෙන ගන්නා සිසුන් සඳහා විශේෂිතයි. මූලික අකුරු, සරල පද සම්බන්ධතා සහ ප්‍රායෝගික ශ්ලෝක ගායනය ඉතා සරලව.</p>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-dashed" style="border-color: var(--border-color);">
+                <span class="text-xs font-semibold text-amber-600 dark:text-amber-400">නොමිලේ / සාධාරණ දායකත්වය</span>
+                <span class="text-[10px] text-muted">සෑම සෙනසුරාදාම උදෑසන 9.00</span>
+              </div>
+            </div>
+
+            <!-- Class 6 -->
+            <div class="p-4 bg-black/5 rounded-2xl border flex flex-col justify-between space-y-3" style="border-color: var(--border-color);">
+              <div class="space-y-1">
+                <span class="px-2 py-0.5 text-[8px] bg-teal-500/10 text-teal-600 border border-teal-500/20 rounded-full uppercase font-bold font-sans">School Specials</span>
+                <h4 class="text-sm font-bold text-main font-sinhala">පාසල් සිසුන් සඳහා සරල සංස්කෘත ප්‍රවේශය</h4>
+                <p class="text-xs text-muted font-sinhala">පාසල්වල කැමති ඕනෑම සිසුවෙකුට හෝ ආධුනිකයෙකුට එක්විය හැක. එදිනෙදා භාවිත වචන, සරල සංවාද හා සූක්ති හුරුවීම.</p>
+              </div>
+              <div class="flex items-center justify-between pt-2 border-t border-dashed" style="border-color: var(--border-color);">
+                <span class="text-xs font-semibold text-teal-600">මාසිකව රු. 800</span>
+                <span class="text-[10px] text-muted">සෑම ඉරිදාම සවස 3.00</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- RIGHT COLUMN: CHAT BOT & STUDY SCROLL (5 COLS) -->
+      <div class="lg:col-span-5 space-y-12" id="right-column">
+
+        <!-- MODULE 6: VIRTUAL SANSKRIT TUTOR CHATBOT -->
+        <section id="sec-chat" class="custom-card p-5 md:p-6 rounded-3xl space-y-4 shadow-lg">
+          <div class="flex items-center gap-3.5 pb-3 border-b" style="border-color: var(--border-color);">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-amber-500/10 border border-amber-500/30 text-amber-600 dark:text-amber-400">
+              <i data-lucide="bot" class="w-4.5 h-4.5 animate-pulse"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold font-sinhala text-main" id="chat-title">ස්මාර්ට් සංස්කෘත සහය සහ උපදේශකයා</h3>
+              <p class="text-[9px] uppercase tracking-widest text-muted font-sans">Sanskrit Grammar & Academy AI Tutor</p>
+            </div>
+          </div>
+
+          <!-- Chat Stream Box Container -->
+          <div class="p-3 bg-black/5 rounded-2xl border flex flex-col justify-between h-[360px]" style="border-color: var(--border-color);" id="chat-container">
+            <!-- Stream messages wrapper -->
+            <div id="chat-stream-box" class="flex-1 overflow-y-auto space-y-2.5 p-1 text-xs">
+              <!-- Default welcome text -->
+              <div class="flex gap-2" id="chat-msg-welcome">
+                <div class="w-6 h-6 rounded-lg bg-amber-500 text-black font-extrabold flex items-center justify-center flex-shrink-0 text-[9px] select-none shadow">ॐ</div>
+                <div class="p-2.5 rounded-2xl max-w-[85%] text-main leading-relaxed bg-white/60 dark:bg-black/30 border border-slate-200 dark:border-slate-800/80 font-sinhala">
+                  නමස්කාරේණ ස්වාගතම්! මම අජිත් බංඩාර ගුරුතුමාගේ ස්මාර්ට් සංස්කෘත සහය උපදේශකයා වෙමි. සංස්කෘත ව්‍යාකරණ (වර්ණ මාලාව, සන්ධි, ක්‍රියාපද), ශ්ලෝක පරිවර්තන, පන්ති විස්තර හෝ විභාග සම්බන්ධව ඕනෑම දෙයක් මාගෙන් විමසන්න.
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Template Question Chips -->
+            <div class="py-2 flex flex-wrap gap-1 border-t" style="border-color: var(--border-color);" id="chat-chip-wrapper">
+              <button onclick="askBotDirect(0)" class="px-2 py-1 text-[9px] font-sinhala text-muted bg-black/5 border border-slate-300 dark:border-slate-800 rounded-full hover:bg-black/10 hover:text-main transition-all cursor-pointer">පන්තිවලට ලියාපදිංචි වන්නේ කෙසේද?</button>
+              <button onclick="askBotDirect(1)" class="px-2 py-1 text-[9px] font-sinhala text-muted bg-black/5 border border-slate-300 dark:border-slate-800 rounded-full hover:bg-black/10 hover:text-main transition-all cursor-pointer">Sandhi (සන්ධි) යනු කුමක්ද?</button>
+              <button onclick="askBotDirect(2)" class="px-2 py-1 text-[9px] font-sinhala text-muted bg-black/5 border border-slate-300 dark:border-slate-800 rounded-full hover:bg-black/10 hover:text-main transition-all cursor-pointer">සරල ශ්ලෝකයක් ලියා තේරුම දෙන්න</button>
+            </div>
+
+            <!-- Text Form Input Bar -->
+            <div class="flex gap-1.5 pt-1.5" id="chat-input-row">
+              <input type="text" id="chat-input" placeholder="ප්‍රශ්නයක් විමසන්න (Ask anything in Sinhala/English)..." onkeydown="handleChatInputKey(event)" class="flex-1 px-3 py-2 bg-white/75 dark:bg-black/40 border rounded-xl text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 text-main font-sinhala transition-all placeholder-slate-500" style="border-color: var(--border-color);">
+              <button onclick="sendChatMessage()" class="p-2.5 custom-btn rounded-xl flex items-center justify-center cursor-pointer transition-all" id="chat-send-btn">
+                <i data-lucide="send" class="w-4 h-4 text-white"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- MODULE 7: SARASWATI MOTIVATION SCROLL & STUDY PLAN GENERATOR -->
+        <section id="sec-blessing" class="custom-card p-5 md:p-6 rounded-3xl space-y-4 shadow-lg">
+          <div class="flex items-center gap-3.5 pb-3 border-b" style="border-color: var(--border-color);">
+            <div class="w-9 h-9 rounded-xl flex items-center justify-center bg-amber-500/10 border border-amber-500/30 text-amber-500">
+              <i data-lucide="award" class="w-4.5 h-4.5 animate-pulse"></i>
+            </div>
+            <div>
+              <h3 class="text-base font-bold font-sinhala text-main" id="bless-title">අභිප්‍රේරණ ශ්ලෝක පත්‍රිකා ජනකය</h3>
+              <p class="text-[9px] uppercase tracking-widest text-muted font-sans">Saraswati Custom Scroll Generator</p>
+            </div>
+          </div>
+
+          <!-- Form layout -->
+          <div class="space-y-3 text-xs" id="blessing-form-container">
+            <div>
+              <label class="text-[10px] font-bold text-muted font-sinhala block mb-1" id="lbl-dev-name">1. ශිෂ්‍යයාගේ නම (Student Name)</label>
+              <input type="text" id="devotee-name-input" placeholder="පින්වත් ශිෂ්‍යයාගේ නම" class="w-full p-2.5 bg-black/5 border rounded-lg text-main font-sinhala focus:outline-none focus:ring-1 focus:ring-amber-500" style="border-color: var(--border-color);">
+            </div>
+            
+            <div>
+              <label class="text-[10px] font-bold text-muted font-sinhala block mb-1" id="lbl-dev-theme">2. උදාර අධ්‍යයන තේමාව (Study Topic)</label>
+              <select id="sponsorship-type-input" class="w-full p-2.5 bg-white dark:bg-black/40 border rounded-lg text-main font-sinhala focus:outline-none focus:ring-1 focus:ring-amber-500" style="border-color: var(--border-color);">
+                <option value="ප්‍රඥාව සහ ඥානය (Wisdom & Knowledge)">ප්‍රඥාව සහ ඥානය (Wisdom & Knowledge)</option>
+                <option value="ධෛර්යය සහ උත්සාහය (Effort & Determination)">ධෛර්යය සහ උත්සාහය (Effort & Determination)</option>
+                <option value="ආචාරධර්ම සහ හික්මීම (Ethics & Character)">ආචාරධර්ම සහ හික්මීම (Ethics & Character)</option>
+                <option value="සාමය සහ සංහිඳියාව (Peace & Harmony)">සාමය සහ සංහිඳියාව (Peace & Harmony)</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="text-[10px] font-bold text-muted font-sinhala block mb-1" id="lbl-dev-asp">3. ඔබේ අනාගත ඉලක්කය / ප්‍රාර්ථනාව (Aspiration)</label>
+              <input type="text" id="devotee-amount-input" placeholder="උදා: අපොස උසස් පෙළ විභාගයෙන් ඉහළින්ම සමත් වීම" class="w-full p-2.5 bg-black/5 border rounded-lg text-main font-sinhala focus:outline-none focus:ring-1 focus:ring-amber-500" style="border-color: var(--border-color);">
+            </div>
+
+            <div class="hidden">
+              <textarea id="devotee-message-input" placeholder="N/A"></textarea>
+            </div>
+
+            <button onclick="generateBlessing()" class="w-full py-3 mt-2 custom-btn rounded-xl font-bold font-sinhala text-xs transition-all hover:scale-[1.02] active:scale-95 cursor-pointer flex items-center justify-center gap-2 shadow" id="bless-btn">
+              <i data-lucide="scroll" class="w-4 h-4"></i> පෞද්ගලික අභිප්‍රේරණ ශ්ලෝක පත්‍රිකාව සාදාගන්න
+            </button>
+          </div>
+
+          <!-- Loading View -->
+          <div id="blessing-loader" class="hidden py-8 flex flex-col items-center justify-center space-y-3">
+            <div class="w-8 h-8 rounded-full border-4 border-amber-500/20 border-t-amber-500 animate-spin"></div>
+            <p class="text-xs text-amber-500 font-sinhala animate-pulse" id="loader-txt">පුරාණ සංස්කෘත සාහිත්‍ය ග්‍රන්ථ පරිශීලනය කෙරේ...</p>
+          </div>
+
+          <!-- Scroll Result Card -->
+          <div id="blessing-result-container" class="hidden space-y-4">
+            <div id="scroll-paper" class="scroll-ancient p-5 rounded-2xl relative overflow-hidden transition-all duration-300 flex flex-col items-center justify-center text-center">
+              <div class="absolute -top-1 left-4 right-4 h-2 bg-amber-900/30 rounded"></div>
+              
+              <div class="space-y-4 my-4 w-full">
+                <span class="text-3xl block animate-pulse">ॐ</span>
+                <h4 id="scroll-title" class="text-base font-extrabold font-sinhala text-amber-950">සරස්වතී අභිප්‍රේරණ පත්‍රිකාව</h4>
+                <div id="scroll-level" class="inline-block px-3 py-1 text-[9px] font-bold uppercase tracking-wider rounded bg-amber-950/10 text-amber-950 font-sinhala">විද්‍යා සාධක</div>
+                
+                <div class="border-y border-amber-950/20 py-3 space-y-3">
+                  <!-- Sanskrit Shloka in Devanagari -->
+                  <p id="scroll-shloka" class="font-sanskrit text-base md:text-lg text-amber-900 font-extrabold leading-relaxed text-center whitespace-pre-line"></p>
+                  <!-- Latin phonetic transliteration -->
+                  <p id="scroll-transliteration" class="font-sans text-[10px] text-amber-850 italic text-center leading-normal max-w-sm mx-auto"></p>
+                </div>
+
+                <div class="text-left space-y-2 text-xs text-amber-900/90 leading-relaxed px-1">
+                  <div>
+                    <span class="font-bold font-sinhala block text-[10px] text-amber-950">සිංහල අනුවාදය (Meaning):</span>
+                    <p id="scroll-sinhala-translation" class="font-sinhala text-[11px]"></p>
+                  </div>
+                  <div class="border-t border-dashed border-amber-950/15 pt-2">
+                    <span class="font-bold font-sans block text-[10px] text-amber-950">English Translation:</span>
+                    <p id="scroll-english-translation" class="font-sans text-[11px]"></p>
+                  </div>
+                  <div class="border-t border-dashed border-amber-950/15 pt-2 bg-amber-900/5 p-2 rounded-lg">
+                    <span class="font-bold font-sinhala block text-[10px] text-amber-950">අජිත් බංඩාර ගුරු උපදේශය (Advisor Counsel):</span>
+                    <p id="scroll-advisor-message" class="font-sinhala text-[11px] italic"></p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="absolute -bottom-1 left-4 right-4 h-2 bg-amber-900/30 rounded"></div>
+            </div>
+
+            <div class="flex gap-2 text-xs">
+              <button onclick="printScroll()" class="flex-1 py-2.5 bg-amber-500 hover:bg-amber-400 text-black font-bold rounded-xl transition-all flex items-center justify-center gap-1.5 cursor-pointer shadow-md" id="print-scroll-btn">
+                <i data-lucide="printer" class="w-4 h-4"></i> පත්‍රිකාව මුද්‍රණය කරන්න / Save as PDF
+              </button>
+              <button onclick="resetSponsorship()" class="px-3.5 py-2.5 bg-black/10 hover:bg-black/20 text-main font-bold rounded-xl transition-all cursor-pointer" title="Generate New Scroll">
+                <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- REVERENT FOOTER -->
+  <footer class="max-w-7xl mx-auto px-4 mt-16 pt-8 border-t text-center text-xs space-y-3.5" style="border-color: var(--border-color);" id="main-footer">
+    <div class="flex justify-center gap-4 text-muted flex-wrap" id="footer-links">
+      <a href="#sec-ai-decoder" class="hover:text-amber-500 transition-colors font-sinhala">ශ්ලෝක විශ්ලේෂක</a>
+      <a href="#sec-vocabulary" class="hover:text-amber-500 transition-colors font-sinhala">ශබ්දකෝෂය</a>
+      <a href="#sec-subhashita" class="hover:text-amber-500 transition-colors font-sinhala">සුභාෂිත සූක්ති</a>
+      <a href="#sec-bio" class="hover:text-amber-500 transition-colors font-sinhala">ගුරු තොරතුරු</a>
+      <a href="#sec-classes" class="hover:text-amber-500 transition-colors font-sinhala">පන්ති ලියාපදිංචිය</a>
+    </div>
+    
+    <div class="space-y-1.5" id="footer-credits">
+      <p class="font-sinhala text-muted" id="footer-c-txt">
+        © 2026 අජිත් බංඩාර සංස්කෘත අධ්‍යයන කේන්ද්‍රය. සියලුම හිමිකම් ඇවිරිණි.
+      </p>
+      <p class="text-[9px] uppercase tracking-widest text-muted font-sans" id="footer-eng-txt">
+        Preserving the pristine wisdom of Sanskrit for generation next. Developed on server-side Gemini.
+      </p>
+    </div>
+  </footer>
+
+  <!-- SANSKRIT PHOTO / LESSON MODAL CARD -->
+  <div id="photo-modal" class="hidden fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-zinc-900 rounded-3xl overflow-hidden max-w-xl w-full border shadow-2xl transition-all" style="border-color: var(--border-color);">
+      <div class="relative aspect-video bg-black">
+        <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
+        <button onclick="closePhotoModal()" class="absolute top-4 right-4 p-2 rounded-full bg-black/60 text-white hover:bg-black/80 transition-all cursor-pointer">
+          <i data-lucide="x" class="w-4.5 h-4.5"></i>
+        </button>
+      </div>
+      <div class="p-6 space-y-2 text-left">
+        <h4 id="modal-title" class="text-base font-bold text-amber-600 dark:text-amber-400 font-sinhala"></h4>
+        <p id="modal-desc" class="text-xs text-muted leading-relaxed font-sinhala"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // CORE GLOBAL PORTAL ENGINE
+    let currentLang = 'si'; // 'si' for Sinhala, 'en' for English
+    let currentTheme = 'gurukul'; // 'gurukul' for Light, 'midnight' for Dark
+    let currentVocabTab = 'greetings';
+
+    // Simulated Sanskrit pronunciations using Web Speech API (transliterations mapping)
+    const VOCAB_DATA = {
+      greetings: [
+        { dev: "नमो नमः", phon: "Namo Namah", sin: "ආයුබෝවන් / ආයුබෝවේවා", eng: "Greetings / Hello", speech: "namo namah" },
+        { dev: "सुप्रभातम्", phon: "Suprabhātam", sin: "සුභ උදෑසනක් වේවා", eng: "Good morning", speech: "suprabhatam" },
+        { dev: "धन्यवादः", phon: "Dhanyavādah", sin: "බොහෝම ස්තුතියි", eng: "Thank you", speech: "dhanyavadah" },
+        { dev: "स्वागतम्", phon: "Svāgatam", sin: "සාදරයෙන් පිළිගනිමු", eng: "Welcome", speech: "svagatam" },
+        { dev: "क्षमताम्", phon: "Kṣamatām", sin: "මට කණගාටුයි / සමාවන්න", eng: "Excuse me / Sorry", speech: "kshamatam" },
+        { dev: "पुनर्मिलामः", phon: "Punarmilāmah", sin: "නැවත හමුවෙමු", eng: "See you again", speech: "punarmilamah" }
+      ],
+      numbers: [
+        { dev: "एकम्", phon: "Ekam", sin: "එක (1)", eng: "One (1)", speech: "ekam" },
+        { dev: "द्वे", phon: "Dve", sin: "දෙක (2)", eng: "Two (2)", speech: "dve" },
+        { dev: "त्रीणि", phon: "Trīṇi", sin: "තුන (3)", eng: "Three (3)", speech: "treeni" },
+        { dev: "चत्वारि", phon: "Catvāri", sin: "හතර (4)", eng: "Four (4)", speech: "chatvari" },
+        { dev: "पञ्च", phon: "Pañca", sin: "පහ (5)", eng: "Five (5)", speech: "pancha" },
+        { dev: "दश", phon: "Daśa", sin: "දහය (10)", eng: "Ten (10)", speech: "dasha" }
+      ],
+      nouns: [
+        { dev: "विद्या", phon: "Vidyā", sin: "ප්‍රඥාව / අධ්‍යාපනය", eng: "Knowledge / Education", speech: "vidya" },
+        { dev: "गुरुः", phon: "Guruḥ", sin: "ගුරුවරයා / මඟපෙන්වන්නා", eng: "Teacher / Mentor", speech: "guruh" },
+        { dev: "छात्रः", phon: "Chātraḥ", sin: "ශිෂ්‍යයා / සිසුවා", eng: "Student (Male)", speech: "chatrah" },
+        { dev: "मित्रम्", phon: "Mitram", sin: "මිතුරා / යහළුවා", eng: "Friend", speech: "mitram" },
+        { dev: "पुस्तकम", phon: "Pustakam", sin: "පොත / ග්‍රන්ථය", eng: "Book", speech: "pustakam" },
+        { dev: "भाषा", phon: "Bhāṣā", sin: "භාෂාව / කථනය", eng: "Language", speech: "bhasha" }
+      ],
+      verbs: [
+        { dev: "पठति", phon: "Paṭhati", sin: "ඔහු/ඇය කියවයි", eng: "He/She reads", speech: "pathati" },
+        { dev: "लिखति", phon: "Likhati", sin: "ඔහු/ඇය ලියයි", eng: "He/She writes", speech: "likhati" },
+        { dev: "गच्छति", phon: "Gacchati", sin: "ඔහු/ඇය යයි", eng: "He/She goes", speech: "gacchati" },
+        { dev: "वदति", phon: "Vadati", sin: "ඔහු/ඇය කථාකරයි", eng: "He/She speaks", speech: "vadati" },
+        { dev: "करोति", phon: "Karoti", sin: "ඔහු/ඇය කරයි", eng: "He/She does", speech: "karoti" },
+        { dev: "नमते", phon: "Namate", sin: "ගෞරව කරයි / වඳියි", eng: "He/She bows", speech: "namate" }
+      ]
+    };
+
+    const SUBHASHITA_LIBRARY = [
+      {
+        shloka: "विद्या ददाति विनयं विनयाद् याति पात्रताम्।\nपात्रत्वात् धनमाप्नोति धनाद्धर्मं ततः सुखम्॥",
+        transliteration: "vidyā dadāti vinayaṃ vinayād yāti pātratām |\npātratvāt dhanamāpnoti dhanāddharmaṃ tataḥ sukham ||",
+        sinMeaning: "සැබෑ අධ්‍යාපනය විසින් මිනිසාට විනය (නිහතමානී බව) ලබාදෙයි. විනයෙන් සුදුසුකම්ද, සුදුසුකම් තුළින් ධාර්මික ධනයද, ධනයෙන් යහපත හා පරම සතුටද ළඟාවේ.",
+        engMeaning: "True knowledge yields humility; from humility comes capability; from capability comes wealth; from wealth comes righteousness, and from that comes ultimate happiness.",
+        author: "හිතෝපදේශය (Hitopadesha)"
+      },
+      {
+        shloka: "आलस्यं हि मनुष्याणां शरीरस्थो महान् रिपुः।\nनास्त्युद्यमसमो बन्धुः कृत्वा यं नावसीदति॥",
+        transliteration: "ālasyaṃ hi manuṣyāṇāṃ śarīrastho mahān ripuḥ |\nnāstyudyamasamo bandhuḥ kṛtvā yaṃ nāvasīdati ||",
+        sinMeaning: "මිනිසාගේ ශරීරයේ පවතින ලොකුම සතුරා වනුයේ අලසකමයි. කඩිසරකම තරම් උදාර මිතුරෙක් තවත් නැත, මන්ද කඩිසර මිනිසා කිසිදිනෙදා පරාජයට පත්නොවේ.",
+        engMeaning: "Laziness is indeed the greatest enemy residing inside the human body. There is no friend like hard work, having done which, a person never suffers.",
+        author: "භර්තෘහරි ශතකය (Bhartrihari)"
+      },
+      {
+        shloka: "सत्यं ब्रूयात् प्रियं ब्रूयात् न ब्रूयात् सत्यमप्रियम्।\nप्रियं च नानृतं ब्रूयात् एष धर्मः सनातनः॥",
+        transliteration: "satyaṃ brūyāt priyaṃ brūyāt na brūyāt satyamapriyam |\npriyaṃ ca nānṛtaṃ brūyāt eṣa dharmaḥ sanātanaḥ ||",
+        sinMeaning: "සත්‍යය කතා කරන්න, ප්‍රසන්න දේ කතා කරන්න, නමුත් අන් අයට රිදවන අමිහිරි සත්‍යය ප්‍රකාශ නොකරන්න. සතුටු කිරීමට බොරුවෙන් නොබණන්න. මෙය සදාතනික ධර්මයයි.",
+        engMeaning: "Speak the truth, speak pleasantly, do not speak unpleasant truth, and do not speak pleasing untruths. This is the eternal path of righteousness.",
+        author: "මනුස්මෘතිය (Manusmriti)"
+      }
+    ];
+
+    const CHAT_TEMPLATES = [
+      {
+        q: "පන්තිවලට ලියාපදිංචි වන්නේ කෙසේද?",
+        a: "අජිත් බංඩාර ගුරුතුමාගේ සංස්කෘත පන්තිවලට සම්බන්ධ වීමට ඉතාමත් පහසුය!\n\n" +
+           "1. **සෘජු WhatsApp පණිවිඩයක්:** [+94 75 829 2584](https://wa.me/94758292584) දුරකථන අංකයට ශිෂ්‍යයාගේ නම, ශ්‍රේණිය සහ පන්තිය සඳහන් කර පණිවිඩයක් එවන්න.\n" +
+           "2. **දුරකථන ඇමතුමක්:** +94 75 829 2584 ඔස්සේ ගුරුතුමා හා සෘජුව කතාකර විස්තර දැනගන්න.\n" +
+           "3. **විද්‍යුත් තැපෑල:** sithuvilidehena207@gmail.com වෙත ඔබගේ ඉල්ලීම යොමු කරන්න.\n\n" +
+           "සියලුම පන්ති Zoom තාක්ෂණය ඔස්සේ අතිශය අන්තර්ක්‍රියාකාරී ලෙස සහ නිබන්ධන තැපැල් මඟින් නිවසටම එවමින් පවත්වනු ලැබේ!"
+      },
+      {
+        q: "Sandhi (සන්ධි) යනු කුමක්ද?",
+        a: "සංස්කෘත ව්‍යාකරණයේ **සන්ධි (Sandhi)** යනු අතිශය වැදගත් කොටසකි. අසල පිහිටි අකුරු දෙකක් එකතු වී අලුත් ශබ්දයක් නිර්මාණය වීම මෙයින් අදහස් වේ (සංයෝජනය).\n\n" +
+           "සන්ධි ප්‍රධාන වශයෙන් කොටස් 3කි:\n" +
+           "1. **ස්වර සන්ධි (Svara Sandhi):** ස්වර අකුරු දෙකක් එක්වීම. උදා: *Deva + Alaya = Devalaya* (දේවාලය)\n" +
+           "2. **ව්‍යඤ්ජන සන්ධි (Vyanjana Sandhi):** ව්‍යඤ්ජනාක්ෂරයක් තවත් අකුරක් හා එක්වීම. උදා: *Jagath + Natha = Jagannatha* (ජගන්නාථ)\n" +
+           "3. **විසර්ග සන්ධි (Visarga Sandhi):** විසර්ගය (:) වෙනත් අකුරක් හා එක්වීම. උදා: *Manah + Hara = Manohar* (මනෝහර)\n\n" +
+           "අපගේ ශ්ලෝක AI විශ්ලේෂකය මඟින් ඕනෑම සන්ධි වූ පදයක් පහසුවෙන්ම වෙන් කර පෙන්විය හැක!"
+      },
+      {
+        q: "සරල ශ්ලෝකයක් ලියා තේරුම දෙන්න",
+        a: "මෙන්න ඔබ වෙනුවෙන් ඉතා ජනප්‍රිය සහ අතිශය අර්ථවත් සුභාෂිත ශ්ලෝකයක්:\n\n" +
+           "**देवनागरी:**\n" +
+           "उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः।\n" +
+           "न हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः॥\n\n" +
+           "**Transliteration:**\n" +
+           "Udyamena hi sidhyanti kāryāṇi na manorathaiḥ |\n" +
+           "na hi suptasya siṃhasya praviśanti mukhe mṛgāḥ ||\n\n" +
+           "**සිංහල අර්ථය:**\n" +
+           "ඕනෑම කාර්යයක් සාර්ථක වන්නේ උත්සාහය හා මහන්සිය නිසාමය, හුදෙක් සිතින් සිහින මැවීමෙන් පමණක් නොවේ. නිදා සිටින සිංහයෙකුගේ කට තුළට සතුන් ඉබේම ගලා එන්නේ නැත. ඌටද දඩයම් කිරීමට උත්සාහ කළ යුතුය.\n\n" +
+           "මෙවැනි වටිනා ශ්ලෝක රැසක් ඉගෙන ගැනීමට අපගේ සතිපතා පන්තිවලට එක්වන්න!"
+      }
+    ];
+
+    // INITIALIZATION RUNNER
+    window.addEventListener('DOMContentLoaded', () => {
+      // Setup Lucide icons
+      lucide.createIcons();
+      
+      // Populate vocabulary
+      switchVocabTab('greetings');
+      
+      // Populate shlokas
+      renderShlokaLibrary();
+    });
+
+    // NAVIGATION ANCHOR FUNCTION
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // THEME CONTROLLER
+    function toggleTheme() {
+      const html = document.documentElement;
+      const moon = document.getElementById('theme-icon-moon');
+      const sun = document.getElementById('theme-icon-sun');
+      
+      if (currentTheme === 'gurukul') {
+        html.classList.remove('theme-gurukul');
+        html.classList.add('theme-midnight');
+        currentTheme = 'midnight';
+        moon.classList.add('hidden');
+        sun.classList.remove('hidden');
+      } else {
+        html.classList.remove('theme-midnight');
+        html.classList.add('theme-gurukul');
+        currentTheme = 'gurukul';
+        sun.classList.add('hidden');
+        moon.classList.remove('hidden');
+      }
+    }
+
+    // LANGUAGE CONTROLLER (sinhala <-> english UI texts)
+    function toggleLanguage() {
+      const btnTxt = document.getElementById('lang-btn-txt');
+      
+      if (currentLang === 'si') {
+        currentLang = 'en';
+        btnTxt.innerText = 'සිංහල';
+        translateToEnglish();
+      } else {
+        currentLang = 'si';
+        btnTxt.innerText = 'English';
+        translateToSinhala();
+      }
+      
+      // Refresh dynamic components
+      switchVocabTab(currentVocabTab);
+      renderShlokaLibrary();
+    }
+
+    function translateToEnglish() {
+      document.getElementById('brand-title').innerText = "Ajith Bandara Sanskrit Center";
+      document.getElementById('brand-subtitle').innerText = "Premium Sanskrit Language & Classics Academy";
+      document.getElementById('hero-indicator').innerText = "Classical Sanskrit Heritage";
+      document.getElementById('hero-main-title').innerText = "Gateway to Sanskrit Studies & Literature";
+      document.getElementById('hero-tagline').innerText = "Interactive Sanskrit courses for school syllabuses (Grades 6-13), Prachina examinations, and global language enthusiasts under the mentorship of veteran academic Mr. Ajith Bandara.";
+      
+      document.getElementById('tab-btn-decoder').innerText = "AI Shloka Decoder";
+      document.getElementById('tab-btn-vocabulary').innerText = "Vocabulary Dictionary";
+      document.getElementById('tab-btn-subhashita').innerText = "Subhashita Library";
+      document.getElementById('tab-btn-bio').innerText = "Teacher Profile";
+      document.getElementById('tab-btn-classes').innerText = "Classes & Rates";
+
+      document.getElementById('decoder-title').innerText = "Sanskrit Shloka & Grammar AI Analyzer";
+      document.getElementById('decoder-intro').innerText = "Type or paste any Sanskrit Shloka or sentence below. Our AI assistant will instantly split the sandhi, provide word-by-word meanings, and explain grammar rules in English and Sinhala.";
+      document.getElementById('shloka-input').placeholder = "Enter Sanskrit shloka here... (e.g. विद्या ददाति विनयं...)";
+      document.getElementById('decode-btn').innerHTML = `<i data-lucide="wand-2" class="w-4 h-4"></i> Decode & Analyze with Gemini`;
+      
+      document.getElementById('vocab-title').innerText = "Sanskrit Visual Dictionary";
+      document.getElementById('vocab-intro').innerText = "Explore basic daily Sanskrit words classified by categories. Click the 'Play' button to hear simulated pronunciations.";
+      
+      document.getElementById('tab-v-greetings').innerText = "Greetings";
+      document.getElementById('tab-v-numbers').innerText = "Numbers";
+      document.getElementById('tab-v-nouns').innerText = "Nouns";
+      document.getElementById('tab-v-verbs').innerText = "Verbs";
+
+      document.getElementById('subhashita-title').innerText = "Curated Sanskrit Subhashita Library";
+
+      document.getElementById('bio-title').innerText = "About Teacher Ajith Bandara";
+      document.getElementById('bio-name').innerText = "Senior Lecturer Ajith Bandara (Sanskrit Scholar)";
+      document.getElementById('bio-role').innerText = "Sanskrit Language, Literature & Oriental Philosophy Senior Lecturer & Consultant";
+      document.getElementById('bio-quote').innerText = `"Sanskrit is not merely an ancient language. It is a golden chest of human wisdom, moral value, and unparalleled literary beauty. My mission is to make this timeless treasure simple, logical, and deeply engaging for the new generation."`;
+      document.getElementById('bio-credentials').innerText = "Over 20 years of teaching excellence, head of Sanskrit department in top national schools and pirivenas, guiding thousands of students to top rankings in GCE Advanced Level examinations.";
+
+      document.getElementById('classes-sec-title').innerText = "Sanskrit Course Curriculums";
+      document.getElementById('classes-sec-subtitle').innerText = "Available Levels & Time Schedules";
+
+      document.getElementById('chat-title').innerText = "Smart Sanskrit AI Tutor";
+      document.getElementById('chat-input').placeholder = "Ask any grammar or translation question...";
+      
+      document.getElementById('bless-title').innerText = "Aspiration & Shloka Scroll Maker";
+      document.getElementById('lbl-dev-name').innerText = "1. Student Name";
+      document.getElementById('devotee-name-input').placeholder = "Enter your name";
+      document.getElementById('lbl-dev-theme').innerText = "2. Focus Moral Theme";
+      document.getElementById('lbl-dev-asp').innerText = "3. Your Target Goal / Aspiration";
+      document.getElementById('devotee-amount-input').placeholder = "e.g. Excel in GCE Advanced Level Sanskrit";
+      document.getElementById('bless-btn').innerHTML = `<i data-lucide="scroll" class="w-4 h-4"></i> Generate My Sanskrit Motivation Scroll`;
+      document.getElementById('loader-txt').innerText = "Consulting classical Sanskrit subhashitas & scripts...";
+
+      document.getElementById('footer-c-txt').innerText = "© 2026 Ajith Bandara Sanskrit Study Center. All Rights Reserved.";
+      document.getElementById('footer-eng-txt').innerText = "Preserving the pristine wisdom of Sanskrit for generation next. Powered by server-side Gemini AI.";
+
+      // Re-create icons for any new buttons
+      lucide.createIcons();
+    }
+
+    function translateToSinhala() {
+      document.getElementById('brand-title').innerText = "අජිත් බංඩාර සංස්කෘත අධ්‍යයන කේන්ද්‍රය";
+      document.getElementById('brand-subtitle').innerText = "Sanskrit Language & Classics Academy";
+      document.getElementById('hero-indicator').innerText = "Classical Sanskrit Heritage";
+      document.getElementById('hero-main-title').innerText = "ගීර්වාණ භාෂා ප්‍රවේශය - සංස්කෘත අධ්‍යයනය";
+      document.getElementById('hero-tagline').innerText = "ප්‍රවීණ දේශක අජිත් බංඩාර ගුරුතුමාගේ මඟපෙන්වීම යටතේ පාසල් විෂය නිර්දේශය (6-13 ශ්‍රේණි), ප්‍රාචීන විභාග සහ භාෂා ආධුනිකයන් සඳහා පවත්වනු ලබන උසස් සංස්කෘත පන්ති මාලාව.";
+      
+      document.getElementById('tab-btn-decoder').innerText = "ශ්ලෝක AI විග්‍රහය";
+      document.getElementById('tab-btn-vocabulary').innerText = "ශබ්දකෝෂය";
+      document.getElementById('tab-btn-subhashita').innerText = "උතුම් සූක්ති මාලාව";
+      document.getElementById('tab-btn-bio').innerText = "දේශක තොරතුරු";
+      document.getElementById('tab-btn-classes').innerText = "පන්ති විස්තර";
+
+      document.getElementById('decoder-title').innerText = "ශ්ලෝක සහ ව්‍යාකරණ AI විශ්ලේෂකය";
+      document.getElementById('decoder-intro').innerText = "ඔබට හමුවන ඕනෑම සංස්කෘත ශ්ලෝකයක්, පද්‍යයක් හෝ වාක්‍යයක් පහත කොටුවේ ඇතුළත් කරන්න. අපගේ කෘත්‍රිම බුද්ධි උපදේශකයා විසින් එහි පද විග්‍රහය (Sandhi Splitting), ශබ්දාර්ථය (Literal Meaning) සහ ව්‍යාකරණ රීති සිංහලෙන් සහ ඉංග්‍රීසියෙන් පැහැදිලි කර දෙනු ඇත.";
+      document.getElementById('shloka-input').placeholder = "උදා: उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः। (මෙහි ශ්ලෝකය ඇතුළත් කරන්න...)";
+      document.getElementById('decode-btn').innerHTML = `<i data-lucide="wand-2" class="w-4 h-4"></i> විශ්ලේෂණය ආරම්භ කරන්න (Analyze with Gemini)`;
+      
+      document.getElementById('vocab-title').innerText = "සංස්කෘත සරල ශබ්දකෝෂය";
+      document.getElementById('vocab-intro').innerText = "සංස්කෘත භාෂාවේ එදිනෙදා භාවිත වන මූලික වචන කාණ්ඩ වෙන්කර පහත දක්වා ඇත. වචනය ශබ්ද කරන ආකාරය ශ්‍රවණය කිරීමට \"Play\" බොත්තම ඔබන්න.";
+      
+      document.getElementById('tab-v-greetings').innerText = "පිළිගැනීම් (Greetings)";
+      document.getElementById('tab-v-numbers').innerText = "සංඛ්‍යා (Numbers)";
+      document.getElementById('tab-v-nouns').innerText = "නාමපද (Nouns)";
+      document.getElementById('tab-v-verbs').innerText = "ක්‍රියාපද (Verbs)";
+
+      document.getElementById('subhashita-title').innerText = "උතුම් සංස්කෘත සුභාෂිත සූක්ති එකතුව";
+
+      document.getElementById('bio-title').innerText = "ප්‍රවීණ දේශක අජිත් බංඩාර ගුරුතුමා";
+      document.getElementById('bio-name').innerText = "ආචාර්ය අජිත් බංඩාර මහතා (Sanskrit Teacher)";
+      document.getElementById('bio-role').innerText = "සංස්කෘත භාෂා හා පෙරදිග ශාස්ත්‍ර පිළිබඳ ජ්‍යෙෂ්ඨ දේශක, ලේඛක";
+      document.getElementById('bio-quote').innerText = `"සංස්කෘත යනු හුදෙක් පැරණි භාෂාවක් පමණක් නොවේ. එය මිනිස් ශිෂ්ටාචාරයේ පාරිශුද්ධ ප්‍රඥාව, සාහිත්‍ය ධනය සහ සාරධර්ම ගැබ්වූ ද්වාරයකි. මාගේ අරමුණ අපගේ ශිෂ්‍ය පරපුරට මෙම සදාතනික උරුමය සරල, විද්‍යාත්මක හා ප්‍රායෝගික ක්‍රමවේද ඔස්සේ සමීප කරවීමයි."`;
+      document.getElementById('bio-credentials').innerText = "වසර 20කට අධික සේවා පළපුරුද්ද, දිවයිනේ ප්‍රමුඛතම පාසල් හා පිරිවෙන් කිහිපයක ප්‍රධාන ආචාර්ය ධුරය, දහස් සංඛ්‍යාත ශිෂ්‍ය ශිෂ්‍යාවන් උසස් පෙළ විභාගයන්ගෙන් ඉහළම ප්‍රථිපල කරා මෙහෙයවූ විශිෂ්ට ඉගැන්වීම් දක්ෂතාවය.";
+
+      document.getElementById('classes-sec-title').innerText = "පවත්වනු ලබන සංස්කෘත පන්ති මාලා";
+      document.getElementById('classes-sec-subtitle').innerText = "Available Curriculums & Batches";
+
+      document.getElementById('chat-title').innerText = "ස්මාර්ට් සංස්කෘත සහය සහ උපදේශකයා";
+      document.getElementById('chat-input').placeholder = "ප්‍රශ්නයක් විමසන්න (Ask anything in Sinhala/English)...";
+      
+      document.getElementById('bless-title').innerText = "අභිප්‍රේරණ ශ්ලෝක පත්‍රිකා ජනකය";
+      document.getElementById('lbl-dev-name').innerText = "1. ශිෂ්‍යයාගේ නම (Student Name)";
+      document.getElementById('devotee-name-input').placeholder = "පින්වත් ශිෂ්‍යයාගේ නම";
+      document.getElementById('lbl-dev-theme').innerText = "2. උදාර අධ්‍යයන තේමාව (Study Topic)";
+      document.getElementById('lbl-dev-asp').innerText = "3. ඔබේ අනාගත ඉලක්කය / ප්‍රාර්ථනාව (Aspiration)";
+      document.getElementById('devotee-amount-input').placeholder = "උදා: අපොස උසස් පෙළ විභාගයෙන් ඉහළින්ම සමත් වීම";
+      document.getElementById('bless-btn').innerHTML = `<i data-lucide="scroll" class="w-4 h-4"></i> පෞද්ගලික අභිප්‍රේරණ ශ්ලෝක පත්‍රිකාව සාදාගන්න`;
+      document.getElementById('loader-txt').innerText = "පුරාණ සංස්කෘත සාහිත්‍ය ග්‍රන්ථ පරිශීලනය කෙරේ...";
+
+      document.getElementById('footer-c-txt').innerText = "© 2026 අජිත් බංඩාර සංස්කෘත අධ්‍යයන කේන්ද්‍රය. සියලුම හිමිකම් ඇවිරිණි.";
+      document.getElementById('footer-eng-txt').innerText = "Preserving the pristine wisdom of Sanskrit for generation next. Developed on server-side Gemini.";
+
+      lucide.createIcons();
+    }
+
+    // INTERACTIVE VOCABULARY GENERATOR
+    function switchVocabTab(tabName) {
+      currentVocabTab = tabName;
+      const tabs = ['greetings', 'numbers', 'nouns', 'verbs'];
+      
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tab-v-${t}`);
+        if (t === tabName) {
+          btn.classList.remove('text-muted');
+          btn.style.borderColor = 'var(--accent-color)';
+          btn.style.color = 'var(--text-main)';
+        } else {
+          btn.classList.add('text-muted');
+          btn.style.borderColor = 'var(--border-color)';
+        }
+      });
+
+      const container = document.getElementById('vocab-grid-container');
+      container.innerHTML = '';
+
+      const items = VOCAB_DATA[tabName];
+      items.forEach((item, index) => {
+        const card = document.createElement('div');
+        card.id = `vocab-card-${tabName}-${index}`;
+        card.className = "p-3.5 bg-black/5 dark:bg-black/35 rounded-xl border flex justify-between items-center transition-all hover:scale-[1.01]";
+        card.style.borderColor = "var(--border-color)";
+
+        card.innerHTML = `
+          <div class="text-left space-y-0.5">
+            <h5 class="font-sanskrit text-sm md:text-base font-bold text-amber-600 dark:text-amber-400">${item.dev}</h5>
+            <p class="text-[10px] font-mono text-muted tracking-wide font-semibold">${item.phon}</p>
+            <p class="text-xs font-sinhala text-main pt-1 border-t border-dashed mt-1" style="border-color: var(--border-color);">${currentLang === 'si' ? item.sin : item.eng}</p>
+          </div>
+          <button onclick="speakSanskrit('${item.speech}', ${index})" class="p-2.5 rounded-full bg-amber-500/10 hover:bg-amber-500/25 border text-amber-600 cursor-pointer transition-all" style="border-color: var(--border-color);" id="vocab-speak-btn-${tabName}-${index}" title="Play audio">
+            <i data-lucide="play" class="w-3.5 h-3.5" id="v-icon-${tabName}-${index}"></i>
+          </button>
+        `;
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    // AUDIO SYNTHESIS / SIMULATOR
+    function speakSanskrit(text, index) {
+      const icon = document.getElementById(`v-icon-${currentVocabTab}-${index}`);
+      if (icon) {
+        icon.setAttribute('data-lucide', 'volume-2');
+        lucide.createIcons();
+      }
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'hi-IN'; // Sanskrit aligns best with Indian Hindi pronunciation model
+        utterance.rate = 0.8;
+        
+        utterance.onend = () => {
+          if (icon) {
+            icon.setAttribute('data-lucide', 'play');
+            lucide.createIcons();
+          }
+        };
+
+        window.speechSynthesis.speak(utterance);
+      } else {
+        // Fallback for systems without speechSynthesis
+        setTimeout(() => {
+          if (icon) {
+            icon.setAttribute('data-lucide', 'play');
+            lucide.createIcons();
+          }
+        }, 1000);
+      }
+    }
+
+    // AUDIO SHLOKA PLAYER
+    function playIntroShloka() {
+      // Simulate reading of Saraswati Vandana chant using beautiful synthesizer speech
+      const playIcon = document.getElementById('shloka-music-icon');
+      playIcon.classList.add('animate-spin');
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const vandana = "या कुन्देन्दुतुषारहारधवला या शुभ्रवस्त्रावृता। या वीणावरदण्डमण्डितकरा या श्वेतपद्मासना॥";
+        const utterance = new SpeechSynthesisUtterance(vandana);
+        utterance.lang = 'hi-IN';
+        utterance.rate = 0.75;
+        utterance.onend = () => {
+          playIcon.classList.remove('animate-spin');
+        };
+        window.speechSynthesis.speak(utterance);
+      } else {
+        setTimeout(() => {
+          playIcon.classList.remove('animate-spin');
+        }, 3000);
+      }
+    }
+
+    // RENDER CURATED SUBHASHITAS
+    function renderShlokaLibrary() {
+      const container = document.getElementById('shloka-library-container');
+      container.innerHTML = '';
+
+      SUBHASHITA_LIBRARY.forEach((item, index) => {
+        const itemEl = document.createElement('div');
+        itemEl.id = `shloka-library-item-${index}`;
+        itemEl.className = "scroll-ancient p-5 md:p-6 rounded-2xl relative overflow-hidden text-center max-w-2xl mx-auto";
+        itemEl.innerHTML = `
+          <div class="absolute -top-1 left-4 right-4 h-2 bg-amber-900/20 rounded"></div>
+          <div class="space-y-3.5 my-2">
+            <span class="text-xl block text-amber-950">ॐ</span>
+            <p class="font-sanskrit text-sm md:text-base text-amber-950 font-extrabold leading-relaxed whitespace-pre-line">${item.shloka}</p>
+            <p class="font-sans text-[10px] text-amber-900 italic max-w-md mx-auto border-t border-amber-950/15 pt-2">${item.transliteration}</p>
+            
+            <div class="text-left pt-2.5 space-y-1.5 text-amber-950 border-t border-dashed border-amber-950/15">
+              <p class="text-xs font-sinhala leading-relaxed"><strong class="font-sinhala text-[10px]">අර්ථය (Sinhala):</strong> ${item.sinMeaning}</p>
+              <p class="text-xs font-sans leading-relaxed"><strong class="font-sans text-[10px]">Meaning (English):</strong> ${item.engMeaning}</p>
+            </div>
+            <div class="flex justify-between items-center text-[9px] text-amber-900/70 font-bold uppercase pt-1 font-sans">
+              <span>Source: ${item.author}</span>
+              <button onclick="speakSanskrit('${item.shloka.replace(/\n/g, ' ')}', 'lib-${index}')" class="px-2 py-1 bg-amber-950/5 hover:bg-amber-950/15 rounded text-amber-950 border border-amber-950/15 flex items-center gap-1 cursor-pointer">
+                <i data-lucide="volume-2" class="w-3 h-3"></i> Pronounce
+              </button>
+            </div>
+          </div>
+          <div class="absolute -bottom-1 left-4 right-4 h-2 bg-amber-900/20 rounded"></div>
+        `;
+        container.appendChild(itemEl);
+      });
+
+      lucide.createIcons();
+    }
+
+    // AI SHLOKA DECODER (GEMINI CONNECTIVITY)
+    function fillSampleShloka(id) {
+      const txt = document.getElementById('shloka-input');
+      if (id === 1) {
+        txt.value = "उद्यमेन हि सिध्यन्ति कार्याणि न मनोरथैः। न हि सुप्तस्य सिंहस्य प्रविशन्ति मुखे मृगाः॥";
+      } else if (id === 2) {
+        txt.value = "विद्या ददाति विनयं विनयाद् याति पात्रताम्। पात्रत्वात् धनमाप्नोति धनाद्धर्मं ततः सुखम्॥";
+      } else if (id === 3) {
+        txt.value = "गुरूर्ब्रह्मा गुरूर्विष्णुः गुरुर्देवो महेश्वरः। गुरुः साक्षात् परं ब्रह्म तस्मै श्रीगुरවේ नमः॥";
+      }
+    }
+
+    function clearDecoder() {
+      document.getElementById('shloka-input').value = '';
+      document.getElementById('decoder-result').classList.add('hidden');
+    }
+
+    async function analyzeShloka() {
+      const input = document.getElementById('shloka-input').value.trim();
+      const loader = document.getElementById('decoder-loading');
+      const resultBox = document.getElementById('decoder-result');
+      const resultText = document.getElementById('decoder-result-text');
+
+      if (!input) {
+        alert(currentLang === 'si' ? 'කරුණාකර විශ්ලේෂණය සඳහා සංස්කෘත ශ්ලෝකයක් ඇතුළත් කරන්න.' : 'Please enter a Sanskrit shloka to analyze.');
+        return;
+      }
+
+      loader.classList.remove('hidden');
+      resultBox.classList.add('hidden');
+
+      try {
+        const response = await fetch('/api/gemini-consult', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: `Please analyze this Sanskrit Shloka: "${input}". Split the sandhi words, list vocabulary meanings, and explain the deep ethical/grammatical moral value. Write the explanation in helpful, elegant literary Sinhala first, followed by a concise English summary. Keep it beautifully formatted using bold points.`
+          })
+        });
+
+        const data = await response.json();
+        loader.classList.add('hidden');
+        resultBox.classList.remove('hidden');
+
+        if (data.reply) {
+          resultText.innerHTML = data.reply.replace(/\n/g, '<br>');
+        } else {
+          resultText.innerHTML = "Error parsing response. Please retry.";
+        }
+      } catch (err) {
+        console.error(err);
+        loader.classList.add('hidden');
+        resultBox.classList.remove('hidden');
+        resultText.innerHTML = "සම්බන්ධතා දෝෂයකි. කරුණාකර නැවත උත්සාහ කරන්න. (Connection error. Please try again.)";
+      }
+    }
+
+    // CHAT ENGINE
+    function handleChatInputKey(event) {
+      if (event.key === 'Enter') {
+        sendChatMessage();
+      }
+    }
+
+    let chatHist = [];
+
+    async function sendChatMessage() {
+      const inputEl = document.getElementById('chat-input');
+      const msgText = inputEl.value.trim();
+      if (!msgText) return;
+
+      inputEl.value = '';
+      appendChatBubble(msgText, 'user');
+
+      // Call API
+      const loadingBubble = appendChatBubble('සිතමින් පවතී... (Tutor is thinking...)', 'bot', true);
+
+      try {
+        const res = await fetch('/api/gemini-consult', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message: msgText,
+            chatHistory: chatHist
+          })
+        });
+
+        const data = await res.json();
+        removeChatBubble(loadingBubble);
+
+        if (data.reply) {
+          appendChatBubble(data.reply, 'bot');
+          chatHist.push({ role: 'user', text: msgText });
+          chatHist.push({ role: 'model', text: data.reply });
+        } else {
+          appendChatBubble("I'm having trouble connecting to the Gurukul server.", 'bot');
+        }
+      } catch (err) {
+        console.error(err);
+        removeChatBubble(loadingBubble);
+        appendChatBubble("Error connecting to server.", 'bot');
+      }
+    }
+
+    function askBotDirect(idx) {
+      const item = CHAT_TEMPLATES[idx];
+      appendChatBubble(item.q, 'user');
+      setTimeout(() => {
+        appendChatBubble(item.a, 'bot');
+      }, 400);
+    }
+
+    function appendChatBubble(text, role, isLoading = false) {
+      const streamBox = document.getElementById('chat-stream-box');
+      const bubble = document.createElement('div');
+      const randomId = 'msg-' + Math.random().toString(36).substr(2, 9);
+      bubble.id = randomId;
+      bubble.className = "flex gap-2 " + (role === 'user' ? 'justify-end' : '');
+
+      const formattedText = text.replace(/\n/g, '<br>');
+
+      if (role === 'user') {
+        bubble.innerHTML = `
+          <div class="p-2.5 rounded-2xl max-w-[85%] text-white leading-relaxed custom-btn font-sinhala shadow">
+            ${formattedText}
+          </div>
+        `;
+      } else {
+        bubble.innerHTML = `
+          <div class="w-6 h-6 rounded-lg bg-amber-500 text-black font-extrabold flex items-center justify-center flex-shrink-0 text-[9px] select-none shadow">ॐ</div>
+          <div class="p-2.5 rounded-2xl max-w-[85%] text-main leading-relaxed bg-white/60 dark:bg-black/30 border border-slate-200 dark:border-slate-800/80 font-sinhala ${isLoading ? 'animate-pulse' : ''}">
+            ${formattedText}
+          </div>
+        `;
+      }
+
+      streamBox.appendChild(bubble);
+      streamBox.scrollTop = streamBox.scrollHeight;
+      return randomId;
+    }
+
+    function removeChatBubble(id) {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    }
+
+    // SARASWATI MOTIVATION SCROLL GENERATOR
+    async function generateBlessing() {
+      const name = document.getElementById('devotee-name-input').value.trim();
+      const theme = document.getElementById('sponsorship-type-input').value;
+      const aspiration = document.getElementById('devotee-amount-input').value.trim();
+
+      if (!name) {
+        alert(currentLang === 'si' ? 'කරුණාකර ශිෂ්‍යයාගේ නම ඇතුළත් කරන්න.' : 'Please enter the student name.');
+        return;
+      }
+
+      const form = document.getElementById('blessing-form-container');
+      const loader = document.getElementById('blessing-loader');
+      const result = document.getElementById('blessing-result-container');
+
+      form.classList.add('hidden');
+      loader.classList.remove('hidden');
+
+      try {
+        const res = await fetch('/api/generate-brief', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            devoteeName: name,
+            sponsorshipType: theme,
+            dedicationMessage: aspiration,
+            amount: "1" // placeholder
+          })
+        });
+
+        const data = await res.json();
+        loader.classList.add('hidden');
+        result.classList.remove('hidden');
+
+        document.getElementById('scroll-title').innerText = data.title || "සරස්වතී අභිප්‍රේරණ පත්‍රිකාව";
+        document.getElementById('scroll-level').innerText = data.sponsorshipLevel || "විද්‍යා සාධක";
+        document.getElementById('scroll-shloka').innerText = data.shloka || "";
+        document.getElementById('scroll-transliteration').innerText = data.transliteration || "";
+        document.getElementById('scroll-sinhala-translation').innerText = data.sinhalaTranslation || "";
+        document.getElementById('scroll-english-translation').innerText = data.translation || "";
+        document.getElementById('scroll-advisor-message').innerText = data.message || "";
+
+      } catch (err) {
+        console.error(err);
+        loader.classList.add('hidden');
+        form.classList.remove('hidden');
+        alert("සම්බන්ධතා දෝෂයකි. නැවත උත්සාහ කරන්න.");
+      }
+    }
+
+    function resetSponsorship() {
+      document.getElementById('blessing-result-container').classList.add('hidden');
+      document.getElementById('blessing-form-container').classList.remove('hidden');
+      document.getElementById('devotee-name-input').value = '';
+      document.getElementById('devotee-amount-input').value = '';
+    }
+
+    function printScroll() {
+      window.print();
+    }
+
+    // PHOTO MODAL VIEWER
+    function openPhotoModal(title, desc, url) {
+      document.getElementById('modal-img').src = url;
+      document.getElementById('modal-title').innerText = title;
+      document.getElementById('modal-desc').innerText = desc;
+      document.getElementById('photo-modal').classList.remove('hidden');
+    }
+
+    function closePhotoModal() {
+      document.getElementById('photo-modal').classList.add('hidden');
+    }
+  </script>
+</body>
+</html>
